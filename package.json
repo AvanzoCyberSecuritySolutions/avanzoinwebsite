@@ -1,0 +1,14 @@
+{
+  "name": "avanzo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "tailwindcss": "^4.1.7",
+    "live-server": "^1.2.2"
+  }
+}
