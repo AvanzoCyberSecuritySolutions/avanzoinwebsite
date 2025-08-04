@@ -271,3 +271,55 @@ document.getElementById("newsletterForm").addEventListener("submit", async funct
     formMessage.className = "text-sm mt-2 text-red-500 text-center";
   }
 });
+
+// Client Slider
+const clientSlider = document.getElementById('clientSlider');
+const prevClientBtn = document.getElementById('prevClient');
+const nextClientBtn = document.getElementById('nextClient');
+let clientCurrentSlide = 0;
+let clientSlideInterval;
+const clientTotalSlides = document.querySelectorAll('#clientSlider > div').length;
+const clientSlideDelay = 2000; // 2 seconds delay
+
+function updateClientSlider() {
+  clientSlider.style.transform = `translateX(-${clientCurrentSlide * 100}%)`;
+}
+
+function nextClientSlide() {
+  clientCurrentSlide = (clientCurrentSlide + 1) % clientTotalSlides;
+  updateClientSlider();
+}
+
+function prevClientSlide() {
+  clientCurrentSlide = (clientCurrentSlide - 1 + clientTotalSlides) % clientTotalSlides;
+  updateClientSlider();
+}
+
+function startClientAutoSlide() {
+  stopClientAutoSlide(); // Clear any existing interval
+  clientSlideInterval = setInterval(nextClientSlide, clientSlideDelay);
+}
+
+function stopClientAutoSlide() {
+  if (clientSlideInterval) {
+    clearInterval(clientSlideInterval);
+  }
+}
+
+// Event Listeners
+prevClientBtn.addEventListener('click', () => {
+  prevClientSlide();
+  startClientAutoSlide(); // Restart auto-slide after manual navigation
+});
+
+nextClientBtn.addEventListener('click', () => {
+  nextClientSlide();
+  startClientAutoSlide(); // Restart auto-slide after manual navigation
+});
+
+// Pause auto-slide when hovering over the slider
+clientSlider.addEventListener('mouseenter', stopClientAutoSlide);
+clientSlider.addEventListener('mouseleave', startClientAutoSlide);
+
+// Start auto-slide when the page loads
+startClientAutoSlide();
